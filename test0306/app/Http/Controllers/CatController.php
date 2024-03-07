@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+
 
 class CatController extends Controller
 {
@@ -21,8 +24,23 @@ class CatController extends Controller
         // $data =route('cats.index');
         // dd($data);
         // return route('cats.index');
-        $url = route('cats.edit', ['cat' => 1]);
-        dd($url);
+        // $url = route('cats.edit', ['cat' => 1]);
+        // dd($url);
+
+        // #SAVE
+        // $data['cats'] = DB::select('SELECT * FROM cats');
+        // return view('cat.index', ['data'=>$data['cats']]);
+        
+        $cats = DB::table('cats')->get();
+        return view('cat.index', ['users' => $cats]);
+
+        // #INSERT
+        //    $res= DB::table('cats')->insert([
+        //         'name' => 'kai',
+        //         'address' => 999,
+        //     ]);
+        //     dd($res);
+
     }
 
     /**
@@ -40,11 +58,21 @@ class CatController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {     $input = $request->except('_token');
-        return redirect()->route('cats.index');
-        dd($input);
-        dd('hello cat store');
+    {
+     
+        $input = $request->except('_token');
+    
+    
+        $res = DB::table('cats')->insert([
+            'name' => $input['name'], 
+     
+        ]);
+    
+
+        dd($res);
+    
     }
+    
 
     /**
      * Display the specified resource.

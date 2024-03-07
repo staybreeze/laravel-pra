@@ -15,6 +15,10 @@
 </head>
 
 <body>
+    @php
+    // dd($users);
+    // dd(gettype($users[0]));
+    @endphp
     <h1>Hello CSS</h1>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -46,38 +50,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Amy</td>
+                <tr>      @foreach($users as $idx=> $user)
+                    <td>{{$idx+1}}</td>
+                    <td>
+                  
+                        {{ $user->name }}
+                   
+                    
+                    </td>
                     <td>
                         <a href="{{route('cats.edit', ['cat' => 1])}}">Edit</a> &nbsp;&nbsp;&nbsp;
                         <a href="http://">Del</a>
                     </td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Amy</td>
-                    <td>
-                        <a href="http://">Edit</a> &nbsp;&nbsp;&nbsp;
-                        <a href="http://">Del</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Amy</td>
-                    <td>
-                        <a href="http://">Edit</a> &nbsp;&nbsp;&nbsp;
-                        <a href="http://">Del</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Amy</td>
-                    <td>
-                        <a href="http://">Edit</a> &nbsp;&nbsp;&nbsp;
-                        <a href="http://">Del</a>
-                    </td>
-                </tr>
+ @endforeach
             </tbody>
         </table>
     </div>
