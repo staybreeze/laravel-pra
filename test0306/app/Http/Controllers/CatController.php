@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use App\Models\Cat;
 
 class CatController extends Controller
 {
@@ -14,6 +14,17 @@ class CatController extends Controller
      */
     public function index()
     {
+
+        //#等於    $data=Cat::all();
+        // foreach (Cat::all() as $item) {
+        //     echo $item->name;
+        // }
+
+        // $data=Cat::all();
+        // dd($data);
+
+        $data=Cat::where('id','>',5)->orderByDesc('id')->get();
+        dd($data);
 
         // $url = 'http://localhost/css/style.css';
         // $url = asset('css/style.css');
@@ -30,7 +41,7 @@ class CatController extends Controller
         // #SAVE
         // $data['cats'] = DB::select('SELECT * FROM cats');
         // return view('cat.index', ['data'=>$data['cats']]);
-        
+
         $cats = DB::table('cats')->get();
         return view('cat.index', ['users' => $cats]);
 
@@ -59,20 +70,22 @@ class CatController extends Controller
      */
     public function store(Request $request)
     {
-     
-        $input = $request->except('_token');
-    
-    
-        $res = DB::table('cats')->insert([
-            'name' => $input['name'], 
-     
-        ]);
-    
 
+
+        $input = $request->except('_token');
+
+        $now = now();
+        $res = DB::table('cats')->insert([
+            'name' => $input['name'],
+            'created_at'  =>   $now,
+            'updated_at'  =>   $now,
+
+        ]);
+
+        return redirect()->route('cats.index');
         dd($res);
-    
     }
-    
+
 
     /**
      * Display the specified resource.
