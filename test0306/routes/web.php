@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\DogController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,9 @@ Route::resource('dogs', DogController::class);
 
 Route::get('/child',function(){
     return view('child');
+});
+
+
+Route::get('/student',function(){
+    return view('student.index');
 });
