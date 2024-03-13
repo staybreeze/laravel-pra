@@ -88,7 +88,21 @@ class StudentController extends Controller
         $data->name = $input['name'];
         $data->save();
 
-        // update mobiles
+        // update mobiles => del students and insert mobiles
+        // 方法二 
+        // 子表刪除 再新增        
+        Mobile::where('student_id', $id)->delete();
+
+         // 手機
+         $item = new Mobile;
+         $item->student_id = $id;
+         $item->mobile = $input['mobile'];
+         $item->save();
+
+        // 方法一
+        // $data = Mobile::where('student_id', $id)->first();
+        // $data->mobile = $input['mobile'];
+        // $data->save();
 
         return redirect()->route('students.index');
 
@@ -100,6 +114,12 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+                // delete students
+                Student::where('id', $student->id)->delete();
+        
+                // delete mobiles
+                Mobile::where('student_id', $student->id)->delete();
+        
+                return redirect()->route('students.index');
     }
 }
