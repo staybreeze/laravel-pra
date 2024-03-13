@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\DogController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\MobileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,8 @@ use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     // return view('welcome');
-    // 轉址
-    return redirect('/cats');
+   
+    return redirect('/students');
 });
 
 // cats 小貓
@@ -29,12 +30,17 @@ Route::resource('cats', CatController::class);
 // dogs 小狗
 Route::resource('dogs', DogController::class);
 
-
-Route::get('/child',function(){
+Route::get('/child', function () {
     return view('child');
 });
 
+// students 學生
+Route::resource('students', StudentController::class);
 
-Route::get('/student',function(){
-    return view('student.index');
-});
+// mobiles 學生
+Route::resource('mobiles', MobileController::class);
+
+
+
+
+

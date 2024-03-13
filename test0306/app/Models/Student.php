@@ -9,9 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Student extends Model
 {
     use HasFactory;
+    protected $table = 'students';
     // 放要join的table
-    public function mobile(): HasOne
+    public function mobileRelation(): HasOne
     {
-        return $this->hasOne(mobile::class);
+        return $this->hasOne(Mobile::class);
     }
 }
+
+
+
+

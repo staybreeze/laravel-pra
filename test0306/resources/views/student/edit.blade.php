@@ -30,18 +30,19 @@
         </div>
     </nav>
 
-    <form action="{{ route('students.store') }}" method="post">
+    <form action="{{ route('students.update',['student' => $data->id]) }}" method="post">
+        @method('PUT')
         @csrf
         {{-- <form action="http://localhost/cats" method="post"> --}}
         <div class="container mt-3">
-            <h2>Student Create</h2>
+            <h2>Student Edit</h2>
             <p>Lorem ipsum dolor sit amet.</p>
             <div class="row">
                 <div class="col ">name</div>
             </div>
             <div class="row">
                 <div class="col">
-                    <input type="text" name="name" id="" class="form-control">
+                    <input type="text" name="name" id="" class="form-control" value="{{$data->name}}">
                 </div>
             </div>
             <div class="row">
@@ -49,7 +50,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input type="text" name="mobile" id="" class="form-control">
+                    <input type="text" name="mobile" id="" class="form-control" value="{{$data->mobileRelation->mobile}}">
                 </div>
             </div>
             <div class="row mt-3">
